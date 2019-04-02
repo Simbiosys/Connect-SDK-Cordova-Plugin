@@ -3,7 +3,7 @@ const exec = require('child_process').exec
 const path = require('path')
 const fs = require('fs')
 const https = require('https')
-const unzip = require('unzip')
+// const unzip = require('unzip')
 const Q = require('q')
 
 // Constants
@@ -132,7 +132,22 @@ AndroidInstall.prototype.downloadFlingSDK = function () {
   https.get(paths.FlingSDK_URL, function (response) {
     response.pipe(file).on('close', function () {
       console.log('Extracting Fling SDK')
-      var uz = fs.createReadStream(safePath('./csdk_tmp/AmazonFling-SDK.zip')).pipe(unzip.Extract({ path: safePath('./csdk_tmp') }))
+      Q.nfcall(exec, 'unzip -q ' + safePath('./csdk_tmp/AmazonFling-SDK.zip') + ' -d ' + safePath('./csdk_tmp'))
+        .then(function () {
+          console.log('Moving AmazonFling.jar')
+          return Q.nfcall(exec, commands.mv + ' ' + safePath(paths.AmazonFling_Jar) + ' ' + safePath('./cordova-plugin-connectsdk/' + csdkDirectory + '/modules/firetv/libs/AmazonFling.jar'))
+        })
+        .then(function () {
+          console.log('Moving WhisperPlay.jar')
+          return Q.nfcall(exec, commands.mv + ' ' + safePath(paths.WhisperPlay_Jar) + ' ' + safePath('./cordova-plugin-connectsdk/' + csdkDirectory + '/modules/firetv/libs/WhisperPlay.jar'))
+        })
+        .then(function () {
+          deferred.resolve()
+        })
+        .catch(function (err) {
+          deferred.reject(err)
+        })
+      /* var uz = fs.createReadStream(safePath('./csdk_tmp/AmazonFling-SDK.zip')).pipe(unzip.Extract({ path: safePath('./csdk_tmp') }))
       uz.on('error', function (err) {
         deferred.reject(err)
       })
@@ -151,9 +166,12 @@ AndroidInstall.prototype.downloadFlingSDK = function () {
               deferred.reject(err)
             })
         }
-      })
+      }) */
     })
+  }).on('error', function (err) {
+    deferred.reject(err)
   })
+
   return deferred.promise
 }
 

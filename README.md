@@ -2,11 +2,11 @@
 
 Connect SDK is an open source framework that unifies device discovery and connectivity by providing one set of methods that work across multiple television platforms and protocols.
 
-For more information, visit our [website](http://www.connectsdk.com/).
+This repository is a fork of the [original one](https://github.com/ConnectSDK/Connect-SDK-Cordova-Plugin)
 
-* [General information about Connect SDK](http://www.connectsdk.com/discover/)
-* [Platform documentation & FAQs](http://www.connectsdk.com/docs/cordova/)
-* [API documentation](http://www.connectsdk.com/apis/cordova/)
+Plugin installation scripts have been refactorized to install plugin correctly using last node and cordova versions.
+
+For more information, visit [Connect SDK Developers website](http://www.svlconnectsdk.com/docs/1-6-0/cordova/).
 
 ## Dependencies
 
@@ -19,52 +19,7 @@ These steps assume you have a basic working knowledge of development for Android
 If you are only developing for one platform, feel free to ignore the steps & requirements for the irrelevant platform.
 
 ## Installation for Cordova/PhoneGap 5.x
-
-#### 1. Create a new Cordova app (optional)
-
-    cordova create sample_app com.example.sample_app SampleApp
-    cd sample_app
-    cordova platform add ios
-    cordova platform add android
-
-#### 2. Add plugin to app
-
-    cordova plugin add cordova-plugin-connectsdk
-
-Or for a specific version, such as 1.6.0
-
-    cordova plugin add cordova-plugin-connectsdk@1.6.0
-    
-You can also install a specific branch from Github (e.g. to install versions older than 1.6.0), such as sdk_1.3
-
-    cordova plugin add https://github.com/ConnectSDK/Connect-SDK-Cordova-Plugin.git#sdk_1.3
-    
-Thats it! Dependencies will be downloaded and set up automatically.
-
-**Dependencies will not be downloaded automatically for versions older than 1.6.0. You'll need to check the README from that branch and follow any manual set up steps.**
-
-## Contact
-* Twitter [@ConnectSDK](https://www.twitter.com/ConnectSDK)
-* Ask a question with the "tv" tag on [Stack Overflow](http://stackoverflow.com/tags/tv)
-* General Inquiries info@connectsdk.com
-* Developer Support support@connectsdk.com
-* Partnerships partners@connectsdk.com
-
-## Troubleshooting
-
-* To update the plugin, you'll need to remove and re-add the plugin
-
-```
-    cordova plugin remove cordova-plugin-connectsdk
-    cordova plugin add cordova-plugin-connectsdk
-```
-
-* If you're using an older version of the ConnectSDK Cordova plugin than 1.6.0, we changed the plugin id for npm publishing. You'll need to remove the plugin using the old id, and add it with the new id.
-
-```
-    cordova plugin remove com.connectsdk.cordovaplugin
-    cordova plugin add cordova-plugin-connectsdk
-```
+    cordova plugin add https://github.com/Simbiosys/Connect-SDK-Cordova-Plugin.git
 
 ## License
 
